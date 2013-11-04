@@ -14,22 +14,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="23a93425-f2e2-4e48-a030-f883e3048acf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/components" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/components/MultipleSelectCombo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/components/ObjectToStringConverter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkComponents.java" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkComponents.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mira/zk/lists/ZkListFormBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/lists/ZkListFormBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtilsImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtilsImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mira-zk.iml" afterPath="$PROJECT_DIR$/mira-zk.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-    </list>
+    <list default="true" readonly="true" id="23a93425-f2e2-4e48-a030-f883e3048acf" name="Default" comment="" />
     <ignored path="mira-zk.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/src/main/java/com/mira/zk/binding/InlineEditorBinder.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1368124843710" ignored="false" />
@@ -41,10 +26,16 @@
     <file path="$PROJECT_DIR$/../gelio/src/main/web/modules/bill/massBill.zul" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1368128972006" ignored="false" />
     <file path="$PROJECT_DIR$/../gelio/src/main/java/com/mira/vseveda/security/SecurityService.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1368128709415" ignored="false" />
     <file path="/SecurityService.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1368128707074" ignored="false" />
-    <file path="/Dummy.txt" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1368129111002" ignored="false" />
+    <file path="/Dummy.txt" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383561686504" ignored="false" />
     <file path="/*.regexp" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1374565166694" ignored="false" />
     <file path="/ZkComponents.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383558467893" ignored="false" />
     <file path="D:/MavenLocalRepository/com/mira/zk/1.6.5/zk-1.6.5-sources.jar!/com/mira/zk/ZkComponents.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383558494436" ignored="false" />
+    <file path="$PROJECT_DIR$/../vseveda/src/main/web/WEB-INF/lang-addon.xml" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383559901151" ignored="false" />
+    <file path="/lang-addon.xml" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383559900308" ignored="false" />
+    <file path="$PROJECT_DIR$/../vseveda/src/main/java/com/mira/vseveda/external/account/SingleBill.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383561373720" ignored="false" />
+    <file path="/SingleBill.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383561325866" ignored="false" />
+    <file path="$PROJECT_DIR$/../vseveda/src/main/java/com/mira/vseveda/web/utils/Windows.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383561357791" ignored="false" />
+    <file path="/Windows.java" changelist="23a93425-f2e2-4e48-a030-f883e3048acf" time="1383561357494" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +99,7 @@
       <file leaf-file-name="ZkUtilsImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtilsImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="66" selection-start="3031" selection-end="3031" vertical-scroll-proportion="0.0">
+            <state line="276" column="66" selection-start="9010" selection-end="9010" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -117,7 +108,7 @@
       <file leaf-file-name="ZkComponents.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkComponents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="196" column="33" selection-start="7431" selection-end="7431" vertical-scroll-proportion="0.76822156">
+            <state line="189" column="32" selection-start="7106" selection-end="7106" vertical-scroll-proportion="0.3340471">
               <folding />
             </state>
           </provider>
@@ -135,7 +126,7 @@
       <file leaf-file-name="ZkUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="11" selection-start="1580" selection-end="1580" vertical-scroll-proportion="0.0">
+            <state line="142" column="11" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -258,6 +249,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,8 +361,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -387,12 +378,12 @@
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -598,7 +589,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1995842" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -616,11 +607,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16059603" sideWeight="0.74012476" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16059603" sideWeight="0.74012476" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1727373" sideWeight="0.74012476" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25987527" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25888324" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="655" width="1056" height="293" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="J2D Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -806,21 +797,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="11" selection-start="1580" selection-end="1580" vertical-scroll-proportion="0.0">
+        <state line="142" column="11" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkUtilsImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="66" selection-start="3031" selection-end="3031" vertical-scroll-proportion="0.0">
+        <state line="276" column="66" selection-start="9010" selection-end="9010" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mira/zk/ZkComponents.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="33" selection-start="7431" selection-end="7431" vertical-scroll-proportion="0.76822156">
+        <state line="189" column="32" selection-start="7106" selection-end="7106" vertical-scroll-proportion="0.3340471">
           <folding />
         </state>
       </provider>

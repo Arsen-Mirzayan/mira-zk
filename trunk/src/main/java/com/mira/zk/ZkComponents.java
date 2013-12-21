@@ -276,7 +276,7 @@ public class ZkComponents {
         if (editor instanceof Datebox) {
             ((Datebox) editor).setWidth("90px");
         } else if (editor instanceof HtmlBasedComponent) {
-            ((HtmlBasedComponent) editor).setWidth("100%");
+            ((HtmlBasedComponent) editor).setHflex("1");
         }
 
         if (parent != null) {

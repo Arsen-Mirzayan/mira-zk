@@ -11,15 +11,6 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.*;
 import org.zkoss.zul.impl.InputElement;
 
-import java.lang.Boolean;
-import java.lang.Class;
-import java.lang.Double;
-import java.lang.Exception;
-import java.lang.IllegalArgumentException;
-import java.lang.Integer;
-import java.lang.Long;
-import java.lang.Object;
-import java.lang.String;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -92,10 +83,27 @@ public class ZkComponents {
             }
         } else if (editor instanceof Label) {
             value = ((Label) editor).getValue();
+        } else if (editor instanceof Radiogroup) {
+            value = getValueFromRadiogroup((Radiogroup) editor);
         } else {
             throw new IllegalArgumentException(String.format("Unregistered type of editor %s", editor.getClass().getName()));
         }
         return value;
+    }
+
+    /**
+     * Читает выбранный элемент из модели радиогруппы
+     *
+     * @param editor радиогруппа
+     * @return выбранный элемент можели или {@code null}
+     */
+    public static Object getValueFromRadiogroup(Radiogroup editor) {
+        int selectedIndex = editor.getSelectedIndex();
+        if (selectedIndex == -1) {
+            return null;
+        } else {
+            return editor.getModel().getElementAt(selectedIndex);
+        }
     }
 
     /**

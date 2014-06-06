@@ -25,10 +25,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="mira-zk" />
+        <module name="zk" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mira-zk" target="1.7" />
+      <module name="zk" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

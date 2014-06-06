@@ -1,6 +1,7 @@
 package com.mira.zk;
 
 import com.mira.utils.StringUtils;
+import com.mira.utils.collections.CollectionUtils;
 import com.mira.zk.binding.InlineEditorBinder;
 import org.springframework.util.comparator.NullSafeComparator;
 import org.zkoss.zk.ui.Component;
@@ -9,6 +10,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.*;
+import org.zkoss.zul.ext.Selectable;
 import org.zkoss.zul.impl.InputElement;
 
 import java.math.BigDecimal;
@@ -104,6 +106,20 @@ public class ZkComponents {
         } else {
             return editor.getModel().getElementAt(selectedIndex);
         }
+    }
+
+    /**
+     * Возвращает элемент, выбранный в указанной модели. Модель должна реализовывать интерфейс {@link Selectable}
+     *
+     * @param model модель
+     * @param <T>   класс результата
+     * @return выбранный элемент или {@code null}
+     */
+    public static  <T> T getSelectedValue(ListModel<T> model) {
+        if (!(model instanceof Selectable)) {
+            throw new IllegalArgumentException(String.format("Model should implement %s", Selectable.class));
+        }
+        return CollectionUtils.getSingleElement(((Selectable<T>) model).getSelection());
     }
 
     /**

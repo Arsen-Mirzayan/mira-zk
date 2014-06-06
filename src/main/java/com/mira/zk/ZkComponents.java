@@ -115,7 +115,7 @@ public class ZkComponents {
      * @param <T>   класс результата
      * @return выбранный элемент или {@code null}
      */
-    public static  <T> T getSelectedValue(ListModel<T> model) {
+    public static <T> T getSelectedValue(ListModel<T> model) {
         if (!(model instanceof Selectable)) {
             throw new IllegalArgumentException(String.format("Model should implement %s", Selectable.class));
         }
@@ -147,31 +147,29 @@ public class ZkComponents {
     public static boolean setValueToListboxSilent(Listbox editor, Object value, Comparator comparator) throws IllegalArgumentException {
         //finding index of selected value
         if (comparator == null) {
-            comparator = new NullSafeComparator(new Comparator() {
+            comparator = new NullSafeComparator<>(new Comparator<Object>() {
 
                 public int compare(Object o1, Object o2) {
                     return o1.equals(o2) ? 0 : 1;
                 }
             }, true);
         } else if (!(comparator instanceof NullSafeComparator)) {
-            comparator = new NullSafeComparator(comparator, true);
+            comparator = new NullSafeComparator<>(comparator, true);
         }
         ListModel model = ((Listbox) editor).getListModel();
         int index = -1;
         for (int i = 0, max = model.getSize(); i < max; i++) {
             Object listValue = model.getElementAt(i);
             if (comparator.compare(value, listValue) == 0) {
-                index = i;
-                break;
+                if (model instanceof Selectable) {
+                    ((Selectable) model).setSelection(Collections.singleton(listValue));
+                } else {
+                    editor.setSelectedIndex(index);
+                }
+                return true;
             }
         }
-        //Setting value
-        if (index >= 0) {
-            editor.setSelectedIndex(index);
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     /**

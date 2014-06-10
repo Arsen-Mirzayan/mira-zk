@@ -271,6 +271,9 @@ public class ZkUtilsImpl implements ZkUtils {
         } else if (value instanceof String[]) {
             String[] values = ((String[]) value);
             return values.length > 0 ? ClassUtils.convert(cl, values[0]) : null;
+        } else if (value instanceof Collection) {
+            Collection values = (Collection) value;
+            return values.isEmpty() ? null : ClassUtils.convert(cl, values.iterator().next());
         } else {
             return ClassUtils.convert(cl, value);
         }

@@ -256,11 +256,11 @@ public class ZkUtilsImpl implements ZkUtils {
 
     @Override
     public boolean showQuestion(String title, String message) {
-        return show(message, title, new Messagebox.Button[]{YES, NO}, Messagebox.QUESTION).equals(YES);
+        return YES.equals(show(message, title, new Messagebox.Button[]{YES, NO}, Messagebox.QUESTION));
     }
 
     private static Messagebox.Button show(String message, String title, Messagebox.Button[] buttons, String icon) {
-        return Messagebox.show(message, title, buttons, null, icon, null, null);
+        return ClassUtils.coalesce(Messagebox.show(message, title, buttons, null, icon, null, null), CANCEL);
     }
 
     @Override

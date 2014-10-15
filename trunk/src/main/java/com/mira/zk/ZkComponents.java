@@ -71,18 +71,25 @@ public class ZkComponents {
         if (editor instanceof Combobox) {
             Combobox combobox = (Combobox) editor;
             int selectedIndex = combobox.getSelectedIndex();
-            value = selectedIndex >= 0 ? combobox.getModel().getElementAt(selectedIndex) : null;
+            value = selectedIndex >= 0
+                    ? combobox.getModel().getElementAt(selectedIndex)
+                    : null;
         } else if (editor instanceof InputElement) {
             value = ((InputElement) editor).getRawValue();
         } else if (editor instanceof Checkbox) {
             value = ((Checkbox) editor).isChecked();
         } else if (editor instanceof Listbox) {
             Listbox listbox = (Listbox) editor;
-            if (listbox.getSelectedIndex() == -1) {
-                value = null;
-            } else {
-                value = listbox.getModel().getElementAt(listbox.getSelectedIndex());
-            }
+            int selectedIndex = listbox.getSelectedIndex();
+            value = selectedIndex >= 0
+                    ? listbox.getModel().getElementAt(selectedIndex)
+                    : null;
+        } else if (editor instanceof Selectbox) {
+            Selectbox selectbox = (Selectbox) editor;
+            int selectedIndex = selectbox.getSelectedIndex();
+            value = selectedIndex >= 0
+                    ? selectbox.getModel().getElementAt(selectedIndex)
+                    : null;
         } else if (editor instanceof Label) {
             value = ((Label) editor).getValue();
         } else if (editor instanceof Radiogroup) {

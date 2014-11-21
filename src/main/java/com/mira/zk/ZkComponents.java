@@ -4,6 +4,7 @@ import com.mira.utils.StringUtils;
 import com.mira.utils.collections.CollectionUtils;
 import com.mira.zk.binding.InlineEditorBinder;
 import org.springframework.util.comparator.NullSafeComparator;
+import org.zkforge.ckez.CKeditor;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.event.Event;
@@ -94,6 +95,8 @@ public class ZkComponents {
             value = ((Label) editor).getValue();
         } else if (editor instanceof Radiogroup) {
             value = getValueFromRadiogroup((Radiogroup) editor);
+        } else if (editor instanceof CKeditor) {
+            value = ((CKeditor) editor).getValue();
         } else {
             throw new IllegalArgumentException(String.format("Unregistered type of editor %s", editor.getClass().getName()));
         }
@@ -126,7 +129,7 @@ public class ZkComponents {
         if (!(model instanceof Selectable)) {
             throw new IllegalArgumentException(String.format("Model should implement %s", Selectable.class));
         }
-        return CollectionUtils.getSingleElement(((Selectable<T>) model).getSelection());
+        return CollectionUtils.getSingleElement(((Selectable<T>) model).<T>getSelection());
     }
 
     /**
@@ -203,6 +206,8 @@ public class ZkComponents {
             ((Longbox) editor).setValue(convert(Long.class, value));
         } else if (editor instanceof Label) {
             ((Label) editor).setValue(convert(String.class, value));
+        } else if (editor instanceof CKeditor) {
+            ((CKeditor) editor).setValue(convert(String.class, value));
         } else {
             throw new IllegalArgumentException(String.format("Unregistered class of editor %s", editor.getClass().getName()));
         }

@@ -9,7 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.mira:utils:1.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.mira:utils:1.7.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
@@ -25,6 +25,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zk:zhtml:6.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zk:zul:6.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zk:zkplus:6.5.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zkforge:ckez:4.3.3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zkforge.el:zcommons-el:1.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.zkoss.zk:zkspring-core:3.0RC" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:org.springframework.aop:3.0.2.RELEASE" level="project" />

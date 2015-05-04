@@ -3,7 +3,7 @@ package com.mira.zk.components;
 /**
  * Конвертор, который преобразует объект в строковое представление
  *
- * @author Мирзаян Арсен Валерьевич <arsen.mirzayan@gmail.com>>
+ * @author Мирзаян Арсен Валерьевич
  */
 public interface ObjectToStringConverter<T> {
 

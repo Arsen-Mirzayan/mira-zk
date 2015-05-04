@@ -22,7 +22,7 @@ import static com.mira.utils.ClassUtils.convert;
 /**
  * Useful methods for working with ZK components
  *
- * @author Мирзаян Арсен Валерьевич <arsen.mirzayan@gmail.com>>
+ * @author Мирзаян Арсен Валерьевич
  */
 public class ZkComponents {
 

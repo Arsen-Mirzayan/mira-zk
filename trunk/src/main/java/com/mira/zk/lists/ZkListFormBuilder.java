@@ -234,7 +234,7 @@ public class ZkListFormBuilder<T> implements ListFormView<T> {
             for (int i = 0; i < columns.size(); i++) {
                 sortDefinitions[i] = new MutableSortDefinition(columns.get(i).getPath(), true, true);
             }
-            objectComparator = new MultiPropertyComparator<T>(sortDefinitions);
+            objectComparator = new MultiPropertyComparator<>(sortDefinitions);
         }
     }
 
@@ -245,30 +245,15 @@ public class ZkListFormBuilder<T> implements ListFormView<T> {
         Div div = new Div();
         div.setSclass("buttonGroup");
         addButton = new Button("Добавить", "/images/add 16.png");
-        addButton.addEventListener(Events.ON_CLICK, new EventListener() {
-
-            public void onEvent(Event event) throws Exception {
-                saveNew();
-            }
-        });
+        addButton.addEventListener(Events.ON_CLICK, event -> saveNew());
         div.appendChild(addButton);
 
         editButton = new Button("Изменить", "/images/edit1 16.png");
-        editButton.addEventListener(Events.ON_CLICK, new EventListener() {
-
-            public void onEvent(Event event) throws Exception {
-                save();
-            }
-        });
+        editButton.addEventListener(Events.ON_CLICK, event -> save());
         div.appendChild(editButton);
 
         deleteButton = new Button("Удалить", "/images/delete 16.png");
-        deleteButton.addEventListener(Events.ON_CLICK, new EventListener() {
-
-            public void onEvent(Event event) throws Exception {
-                delete();
-            }
-        });
+        deleteButton.addEventListener(Events.ON_CLICK, event -> delete());
         div.appendChild(deleteButton);
 
         detailHolder.appendChild(div);
@@ -276,7 +261,7 @@ public class ZkListFormBuilder<T> implements ListFormView<T> {
 
     /**
      * Возвращает список метаданных по колонкам, которые будут показываться
-     * в основном списке редактируемых объектов. <br/>
+     * в основном списке редактируемых объектов.
      * Должен быть определён потоками.
      *
      * @return не может быть {@code null} или пустым.
@@ -300,16 +285,13 @@ public class ZkListFormBuilder<T> implements ListFormView<T> {
         objectsListbox.appendChild(head);
 
         objectsListbox.setItemRenderer(new ObjectListRenderer(columns));
-        objectsListbox.addEventListener(Events.ON_SELECT, new EventListener() {
-
-            public void onEvent(Event event) throws Exception {
-                Set items = ((SelectEvent) event).getSelectedItems();
-                if (items.isEmpty()) {
-                    setSelectedObject(null);
-                } else {
-                    Listitem item = (Listitem) new ArrayList(items).get(0);
-                    setSelectedObject((T) item.getValue());
-                }
+        objectsListbox.addEventListener(Events.ON_SELECT, event -> {
+            Set items = ((SelectEvent) event).getSelectedItems();
+            if (items.isEmpty()) {
+                setSelectedObject(null);
+            } else {
+                Listitem item = (Listitem) new ArrayList(items).get(0);
+                setSelectedObject((T) item.getValue());
             }
         });
     }

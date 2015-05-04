@@ -3,7 +3,7 @@ package com.mira.zk.binding;
 /**
  * Исключение, возникаюшее в ходе биндинга
  *
- * @author Мирзаян Арсен Валерьевич <arsen.mirzayan@gmail.com>
+ * @author Мирзаян Арсен Валерьевич
  */
 public class BindingException extends RuntimeException {
 

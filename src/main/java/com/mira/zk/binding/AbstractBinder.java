@@ -11,7 +11,7 @@ import java.util.List;
  * для работы с подписчиками, а также основные методы по установки значение в свойство
  * целевого объекта.
  *
- * @author Мирзаян Арсен Валерьевич <arsen.mirzayan@gmail.com>
+ * @author Мирзаян Арсен Валерьевич
  */
 public abstract class AbstractBinder {
 

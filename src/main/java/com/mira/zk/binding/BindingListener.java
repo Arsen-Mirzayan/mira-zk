@@ -4,7 +4,7 @@ package com.mira.zk.binding;
 /**
  * Listener of binding event
  *
- * @author Mirzayan Arsen <arsen.mirzayan@gmail.com>
+ * @author Mirzayan Arsen
  */
 public interface BindingListener {
 

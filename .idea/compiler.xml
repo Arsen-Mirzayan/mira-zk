@@ -25,13 +25,18 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="mira-zk" />
+      </profile>
+      <profile default="false" name="Annotation profile for zk" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
         <module name="zk" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mira-zk" target="1.7" />
-      <module name="zk" target="1.7" />
+      <module name="zk" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
-

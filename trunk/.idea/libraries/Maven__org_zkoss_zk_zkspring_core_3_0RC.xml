@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.zkoss.zk:zkspring-core:3.0RC">
+    <CLASSES>
+      <root url="jar://D:/Maven repository/org/zkoss/zk/zkspring-core/3.0RC/zkspring-core-3.0RC.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/Maven repository/org/zkoss/zk/zkspring-core/3.0RC/zkspring-core-3.0RC-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/Maven repository/org/zkoss/zk/zkspring-core/3.0RC/zkspring-core-3.0RC-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

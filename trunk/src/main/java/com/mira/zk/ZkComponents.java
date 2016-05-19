@@ -45,10 +45,10 @@ public class ZkComponents {
         return (T) result;
     }
 
-    private final static Map<Class, Class<? extends Component>> EDITORS;
+    private final static Map<Class, Class<? extends HtmlBasedComponent>> EDITORS;
 
     static {
-        EDITORS = new HashMap<Class, Class<? extends Component>>();
+        EDITORS = new HashMap<>();
         EDITORS.put(String.class, Textbox.class);
         EDITORS.put(Date.class, Datebox.class);
         EDITORS.put(Boolean.class, Checkbox.class);
@@ -221,8 +221,8 @@ public class ZkComponents {
      * @param initialValue initial value. Can be {@code null}
      * @return editor
      */
-    public static <T> Component createEditor(Class<T> cl, T initialValue) {
-        Component result;
+    public static <T> HtmlBasedComponent createEditor(Class<T> cl, T initialValue) {
+        HtmlBasedComponent result;
         try {
             result = EDITORS.get(cl).newInstance();
         } catch (Exception ex) {

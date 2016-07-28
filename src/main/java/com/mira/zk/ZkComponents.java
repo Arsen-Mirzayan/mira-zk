@@ -208,6 +208,8 @@ public class ZkComponents {
       ((Label) editor).setValue(convert(String.class, value));
     } else if (editor instanceof CKeditor) {
       ((CKeditor) editor).setValue(convert(String.class, value));
+    } else if (editor instanceof Listbox) {
+      setValueToListbox((Listbox) editor, value, null);
     } else {
       throw new IllegalArgumentException(String.format("Unregistered class of editor %s", editor.getClass().getName()));
     }

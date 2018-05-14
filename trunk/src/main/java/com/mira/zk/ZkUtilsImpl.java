@@ -133,20 +133,7 @@ public class ZkUtilsImpl implements ZkUtils {
   }
 
   @Override
-  public InputStream uploadFileAsStream() {
-    Media media;
-    media = Fileupload.get(true);
-    if (media == null) {
-      return null;
-    } else {
-      return media.getStreamData();
-    }
-  }
-
-  @Override
-  public byte[] uploadFileAsBytes() {
-    Media media;
-    media = Fileupload.get(true);
+  public byte[] extractBytes(Media media) {
     if (media == null) {
       return null;
     } else if (media.inMemory()) {
@@ -177,13 +164,6 @@ public class ZkUtilsImpl implements ZkUtils {
       }
       return new File(media.getName(), content);
     }
-  }
-
-  @Override
-  public File uploadFile() {
-    Media media;
-    media = Fileupload.get(true);
-    return extractFileFromMedia(media);
   }
 
   @Override

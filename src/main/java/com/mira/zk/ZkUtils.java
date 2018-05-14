@@ -165,25 +165,12 @@ public interface ZkUtils {
   public void clearAllErrorMessages(Component parent, Component... excludes);
 
   /**
-   * Uploads single file and returns stream. If user cancelled uploading then returns {@code null}
+   * Converts media to byte array
    *
-   * @return stream
-   */
-  public InputStream uploadFileAsStream();
-
-  /**
-   * uploads single file and returns arrays of bytes. If user cancelled uploading then returns {@code null}
-   *
+   * @param media media
    * @return array of uploaded bytes
    */
-  public byte[] uploadFileAsBytes();
-
-  /**
-   * Вызывает окно диалога по выбору файла
-   *
-   * @return загруженный файл
-   */
-  public File uploadFile();
+  public byte[] extractBytes(Media media);
 
   /**
    * Извлекает название файла и его содержимое в память

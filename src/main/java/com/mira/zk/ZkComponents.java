@@ -324,66 +324,7 @@ public class ZkComponents {
     return editor;
   }
 
-  /**
-   * Создаёт и настраивает кнопку удаления строки в списке. Обычно эта кнопка
-   * находится в последней ячейке строки. Созданая кнопка добавляется на родительский
-   * компонент. <p>
-   * Если не указан слушатель события нажатия на кнопку, то будет установлен слушатель
-   * по умолчанию. В этом случае при нажатии на кнопку будет найден родительский компонент
-   * {@link org.zkoss.zul.Listitem}. Свойство {@code value}, этого компонента и есть искомый элемент модели,
-   * который надо удалить. Будет найден родительский компонент {@link Listbox} и если
-   * его модель поддерживает удаление элемента, то найденный ранее элемент будет удалён
-   * ихз модели. Чтобы модель поддерживала удаление, надо, чтобы она реализовывала интерфейс
-   * {@link java.util.Collection}, как например {@link org.zkoss.zul.ListModelList}.<p>
-   * Рекомендуемая ширина ячейки под кнопку 40px.
-   *
-   * @param parent        родительский компонент.
-   * @param clickListener слушатель события {@code Events.ON_CLICK}
-   * @return компонент редактор
-   * @see org.zkoss.zul.ListModelList
-   * @see java.util.Collection
-   */
-  public static Button createInlineDeleteButton(Component parent, EventListener clickListener) {
-    Button deleteButton = new Button("", "/images/delete 16.png");
-    //Слушатель
-    if (clickListener != null) {
-      deleteButton.addEventListener(Events.ON_CLICK, clickListener);
-    } else {
-      deleteButton.addEventListener(Events.ON_CLICK, new EventListener() {
 
-        public void onEvent(Event event) throws Exception {
-          Listitem listitem = findAncestor(event.getTarget(), Listitem.class);
-          if (listitem != null && listitem.getValue() != null) {
-            Object value = listitem.getValue();
-            Listbox listbox = findAncestor(listitem, Listbox.class);
-            if (listbox != null && listbox.getModel() != null) {
-              ListModel model = listbox.getModel();
-              if (model instanceof Collection) {
-                ((Collection) model).remove(value);
-              }
-            }
-          }
-        }
-      });
-    }
-
-    //Родитель
-    if (parent != null) {
-      parent.appendChild(deleteButton);
-    }
-    return deleteButton;
-  }
-
-  /**
-   * Создаёт и настраивает кнопку удаления строки в списке. На кнопку вешается
-   * слушатель по умолчанию. Детально читайте здесь {@link #createInlineDeleteButton(org.zkoss.zk.ui.Component, org.zkoss.zk.ui.event.EventListener) }
-   *
-   * @param parent родительский компонент.
-   * @return
-   */
-  public static Button createInlineDeleteButton(Component parent) {
-    return createInlineDeleteButton(parent, null);
-  }
 
   /**
    * Создаёт выпадающий список выбора значений. Компонент настраивается так,

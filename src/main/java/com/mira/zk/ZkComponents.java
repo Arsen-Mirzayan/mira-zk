@@ -376,10 +376,7 @@ public class ZkComponents {
     }
 
     if (parent != null) {
-      Div div = new Div();
-      div.setSclass("inlineEditHolder");
-      div.appendChild(listbox);
-      parent.appendChild(div);
+      parent.appendChild(listbox);
     }
     return listbox;
   }

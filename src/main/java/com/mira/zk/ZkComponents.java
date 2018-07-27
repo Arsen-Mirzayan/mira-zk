@@ -7,9 +7,6 @@ import org.springframework.util.comparator.NullSafeComparator;
 import org.zkforge.ckez.CKeditor;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.HtmlBasedComponent;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.*;
 import org.zkoss.zul.ext.Selectable;
 import org.zkoss.zul.impl.InputElement;
@@ -301,29 +298,17 @@ public class ZkComponents {
    * @return
    */
   public static <T> Component createInlineEditor(Component parent, Class<T> cl, T initialValue, String propertyName) {
-    Component editor = createEditor(cl, initialValue);
-
+    HtmlBasedComponent editor = createEditor(cl, initialValue);
     //Setting binding
     if (!StringUtils.isEmpty(propertyName)) {
       new InlineEditorBinder(editor, propertyName);
     }
-
-    //Setting width for inline editor
-    if (editor instanceof Datebox) {
-      ((Datebox) editor).setWidth("90px");
-    } else if (editor instanceof HtmlBasedComponent) {
-      ((HtmlBasedComponent) editor).setHflex("1");
-    }
-
+    editor.setHflex("1");
     if (parent != null) {
-      Div div = new Div();
-      div.setSclass("inlineEditorHolder");
-      div.appendChild(editor);
-      parent.appendChild(div);
+      parent.appendChild(editor);
     }
     return editor;
   }
-
 
 
   /**

@@ -3,7 +3,7 @@ package com.mira.zk;
 import com.mira.utils.ClassUtils;
 import com.mira.utils.StreamUtils;
 import com.mira.utils.StringUtils;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.*;

@@ -42,7 +42,7 @@ public class ZkComponents {
     return (T) result;
   }
 
-  private final static Map<Class, Class<? extends HtmlBasedComponent>> EDITORS;
+  protected final static Map<Class, Class<? extends HtmlBasedComponent>> EDITORS;
 
   static {
     EDITORS = new HashMap<>();

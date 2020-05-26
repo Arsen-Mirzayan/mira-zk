@@ -30,160 +30,160 @@ import org.zkoss.zul.*;
  */
 public class InlineEditorBinder extends AbstractBinder {
 
-    protected Component component;
+  private Component component;
 
-    private AbstactEditorListener getEventListener(Class<? extends Component> cl) {
-        if (cl.isAssignableFrom(Datebox.class)) {
-            return new DateboxListener();
-        } else if (cl.isAssignableFrom(Textbox.class)) {
-            return new TextboxListener();
-        } else if (cl.isAssignableFrom(Doublebox.class)) {
-            return new DoubleboxListener();
-        } else if (cl.isAssignableFrom(Decimalbox.class)) {
-            return new DecimalboxListener();
-        } else if (cl.isAssignableFrom(Intbox.class)) {
-            return new IntboxListener();
-        } else if (cl.isAssignableFrom(Checkbox.class)) {
-            return new CheckboxListener();
-        } else if (cl.isAssignableFrom(Listbox.class)) {
-            return new ListboxListener();
-        }
-
-        return null;
+  private AbstactEditorListener getEventListener(Class<? extends Component> cl) {
+    if (Datebox.class.isAssignableFrom(cl)) {
+      return new DateboxListener();
+    } else if (Textbox.class.isAssignableFrom(cl)) {
+      return new TextboxListener();
+    } else if (Doublebox.class.isAssignableFrom(cl)) {
+      return new DoubleboxListener();
+    } else if (Decimalbox.class.isAssignableFrom(cl)) {
+      return new DecimalboxListener();
+    } else if (Intbox.class.isAssignableFrom(cl)) {
+      return new IntboxListener();
+    } else if (Checkbox.class.isAssignableFrom(cl)) {
+      return new CheckboxListener();
+    } else if (Listbox.class.isAssignableFrom(cl)) {
+      return new ListboxListener();
     }
 
-    protected String getEvent(Class<? extends Component> cl) {
-        if (cl.isAssignableFrom(Checkbox.class)) {
-            return Events.ON_CHECK;
-        } else if (cl.isAssignableFrom(Listbox.class)) {
-            return Events.ON_SELECT;
-        }
-        return Events.ON_CHANGE;
+    return null;
+  }
+
+  protected String getEvent(Class<? extends Component> cl) {
+    if (cl.isAssignableFrom(Checkbox.class)) {
+      return Events.ON_CHECK;
+    } else if (cl.isAssignableFrom(Listbox.class)) {
+      return Events.ON_SELECT;
+    }
+    return Events.ON_CHANGE;
+  }
+
+  /**
+   * Создаёт экземпляр биндера и насранивает компонент ввода.
+   *
+   * @param component    компонент ввода, отвечающий за свойство
+   * @param propertyName пусть к свойству объекта.
+   */
+  public InlineEditorBinder(Component component, String propertyName) {
+    super(propertyName);
+    this.component = component;
+    AbstactEditorListener listener = getEventListener(component.getClass());
+    if (listener == null) {
+      throw new BindingException(String.format("Component %s is not supported by binder %s", component.getClass().getName(), getClass().getName()));
+    }
+    String event = getEvent(component.getClass());
+    listener.setBinder(this);
+    component.addEventListener(event, listener);
+  }
+
+  @Override
+  protected Object getDestinationObject() {
+    Listitem item = ZkComponents.findAncestor(component, Listitem.class);
+    return item != null ? item.getValue() : null;
+  }
+
+  /**
+   * Абстрактный слушатель. Получает событие и передаёт его абстрактному методу
+   * {@link #getValue(org.zkoss.zk.ui.event.Event) }, чтобы получить из события
+   * объект. Далее полученный объект передаётся биндеру, чтобы тот проставил
+   * его свойству целевого объекта.
+   */
+  private abstract class AbstactEditorListener implements EventListener {
+
+    private InlineEditorBinder binder;
+
+    public AbstactEditorListener() {
     }
 
-    /**
-     * Создаёт экземпляр биндера и насранивает компонент ввода.
-     *
-     * @param component    компонент ввода, отвечающий за свойство
-     * @param propertyName пусть к свойству объекта.
-     */
-    public InlineEditorBinder(Component component, String propertyName) {
-        super(propertyName);
-        this.component = component;
-        AbstactEditorListener listener = getEventListener(component.getClass());
-        if (listener == null) {
-            throw new BindingException(String.format("Component %s is not supported by binder %s", component.getClass().getName(), getClass().getName()));
-        }
-        String event = getEvent(component.getClass());
-        listener.setBinder(this);
-        component.addEventListener(event, listener);
+    public void setBinder(InlineEditorBinder binder) {
+      this.binder = binder;
+    }
+
+    protected abstract Object getValue(Event event);
+
+    public void onEvent(Event event) throws java.lang.Exception {
+      binder.setValue(getValue(event));
+    }
+  }
+
+  private class IntboxListener extends AbstactEditorListener {
+
+    public IntboxListener() {
     }
 
     @Override
-    protected Object getDestinationObject() {
-        Listitem item = ZkComponents.findAncestor(component, Listitem.class);
-        return item != null ? item.getValue() : null;
+    protected Object getValue(Event event) {
+      return ((Intbox) event.getTarget()).getValue();
+    }
+  }
+
+  private class TextboxListener extends AbstactEditorListener {
+
+    public TextboxListener() {
     }
 
-    /**
-     * Абстрактный слушатель. Получает событие и передаёт его абстрактному методу
-     * {@link #getValue(org.zkoss.zk.ui.event.Event) }, чтобы получить из события
-     * объект. Далее полученный объект передаётся биндеру, чтобы тот проставил
-     * его свойству целевого объекта.
-     */
-    private abstract class AbstactEditorListener implements EventListener {
+    @Override
+    protected Object getValue(Event event) {
+      return ((Textbox) event.getTarget()).getValue();
+    }
+  }
 
-        private InlineEditorBinder binder;
+  private class DoubleboxListener extends AbstactEditorListener {
 
-        public AbstactEditorListener() {
-        }
-
-        public void setBinder(InlineEditorBinder binder) {
-            this.binder = binder;
-        }
-
-        protected abstract Object getValue(Event event);
-
-        public void onEvent(Event event) throws java.lang.Exception {
-            binder.setValue(getValue(event));
-        }
+    public DoubleboxListener() {
     }
 
-    private class IntboxListener extends AbstactEditorListener {
+    @Override
+    protected Object getValue(Event event) {
+      return ((Doublebox) event.getTarget()).getValue();
+    }
+  }
 
-        public IntboxListener() {
-        }
+  private class DecimalboxListener extends AbstactEditorListener {
 
-        @Override
-        protected Object getValue(Event event) {
-            return ((Intbox) event.getTarget()).getValue();
-        }
+    public DecimalboxListener() {
     }
 
-    private class TextboxListener extends AbstactEditorListener {
+    @Override
+    protected Object getValue(Event event) {
+      return ((Decimalbox) event.getTarget()).getValue();
+    }
+  }
 
-        public TextboxListener() {
-        }
+  private class DateboxListener extends AbstactEditorListener {
 
-        @Override
-        protected Object getValue(Event event) {
-            return ((Textbox) event.getTarget()).getValue();
-        }
+    public DateboxListener() {
     }
 
-    private class DoubleboxListener extends AbstactEditorListener {
+    @Override
+    protected Object getValue(Event event) {
+      return ((Datebox) event.getTarget()).getValue();
+    }
+  }
 
-        public DoubleboxListener() {
-        }
+  private class CheckboxListener extends AbstactEditorListener {
 
-        @Override
-        protected Object getValue(Event event) {
-            return ((Doublebox) event.getTarget()).getValue();
-        }
+    public CheckboxListener() {
     }
 
-    private class DecimalboxListener extends AbstactEditorListener {
+    @Override
+    protected Object getValue(Event event) {
+      return ((CheckEvent) event).isChecked();
+    }
+  }
 
-        public DecimalboxListener() {
-        }
+  private class ListboxListener extends AbstactEditorListener {
 
-        @Override
-        protected Object getValue(Event event) {
-            return ((Decimalbox) event.getTarget()).getValue();
-        }
+    public ListboxListener() {
     }
 
-    private class DateboxListener extends AbstactEditorListener {
-
-        public DateboxListener() {
-        }
-
-        @Override
-        protected Object getValue(Event event) {
-            return ((Datebox) event.getTarget()).getValue();
-        }
+    @Override
+    protected Object getValue(Event event) {
+      Listitem item = ((Listbox) event.getTarget()).getSelectedItem();
+      return item == null ? null : item.getValue();
     }
-
-    private class CheckboxListener extends AbstactEditorListener {
-
-        public CheckboxListener() {
-        }
-
-        @Override
-        protected Object getValue(Event event) {
-            return ((CheckEvent) event).isChecked();
-        }
-    }
-
-    private class ListboxListener extends AbstactEditorListener {
-
-        public ListboxListener() {
-        }
-
-        @Override
-        protected Object getValue(Event event) {
-            Listitem item = ((Listbox) event.getTarget()).getSelectedItem();
-            return item == null ? null : item.getValue();
-        }
-    }
+  }
 }

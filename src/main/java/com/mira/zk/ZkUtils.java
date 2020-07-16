@@ -186,6 +186,7 @@ public interface ZkUtils {
    * @param source карта параметров
    * @param name   имя параметра
    * @param cl     класс, к которому нужно преобразовать значение
+   * @param <T> класс
    * @return значение параметра или {@code null}, если параметр не передан
    */
   <T> T extractParameter(Map source, String name, Class<T> cl);

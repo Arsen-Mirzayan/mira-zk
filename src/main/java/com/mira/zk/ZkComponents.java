@@ -28,6 +28,7 @@ public class ZkComponents {
    *
    * @param source        source object.
    * @param ancestorClass class of ancestor
+   * @param <T>           class
    * @return founded ancestor or {@code null}
    */
   public static <T> T findAncestor(Component source, Class<T> ancestorClass) {
@@ -149,6 +150,7 @@ public class ZkComponents {
    * @param editor     listbox
    * @param value      value
    * @param comparator comparator for searching value in list model
+   * @return {@code true} if value is found and selected
    * @throws IllegalArgumentException if value is not found
    */
   public static boolean setValueToListboxSilent(Listbox editor, Object value, Comparator comparator) throws IllegalArgumentException {
@@ -217,6 +219,7 @@ public class ZkComponents {
    * Creates default editor for class
    *
    * @param cl           class
+   * @param <T>          class
    * @param initialValue initial value. Can be {@code null}
    * @return editor
    */
@@ -253,6 +256,7 @@ public class ZkComponents {
    * @param parent       родительский компонент.
    * @param cl           класс объектов для редактирования.
    * @param initialValue начальное значение редактора. Может быть {@code null}.
+   * @param <T>          класс
    * @return компонент редактор
    */
   public static <T> Component createInlineEditor(Component parent, Class<T> cl, T initialValue) {
@@ -293,9 +297,10 @@ public class ZkComponents {
    *
    * @param parent       родительский компонент.
    * @param cl           класс объектов для редактирования.
+   * @param <T>          коасс
    * @param initialValue начальное значение редактора. Может быть {@code null}.
    * @param propertyName свойство редактируемого объекта, которое будет связано со списком. Может быть {@code null}.
-   * @return
+   * @return созданный компонент
    */
   public static <T> Component createInlineEditor(Component parent, Class<T> cl, T initialValue, String propertyName) {
     HtmlBasedComponent editor = createEditor(cl, initialValue);
@@ -323,7 +328,7 @@ public class ZkComponents {
    * @param renderer     реденерер списка. Если указан {@code null}, то будет использоваться
    *                     рендерер по умолчанию.
    * @param initialValue начальное значение.
-   * @return
+   * @return созданный компонент списка
    */
   public static Listbox createInlineListbox(Component parent, ListModel model, ListitemRenderer renderer,
                                             Object initialValue) {
@@ -348,7 +353,7 @@ public class ZkComponents {
    *                     рендерер по умолчанию.
    * @param initialValue начальное значение.
    * @param propertyName свойство редактируемого объекта, которое будет связано со списком. Может быть {@code null}.
-   * @return
+   * @return компонент списка
    */
   public static Listbox createInlineListbox(Component parent, ListModel model, ListitemRenderer renderer,
                                             Object initialValue, String propertyName) {

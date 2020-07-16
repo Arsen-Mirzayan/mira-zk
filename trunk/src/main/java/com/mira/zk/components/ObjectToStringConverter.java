@@ -7,11 +7,11 @@ package com.mira.zk.components;
  */
 public interface ObjectToStringConverter<T> {
 
-    /**
-     * Возвращает строковое представление переданного объекта.
-     *
-     * @param source
-     * @return строковое представление объекта
-     */
-    public String toString(T source);
+  /**
+   * Возвращает строковое представление переданного объекта.
+   *
+   * @param source исходный объект
+   * @return строковое представление объекта
+   */
+  public String toString(T source);
 }

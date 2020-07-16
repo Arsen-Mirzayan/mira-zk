@@ -11,6 +11,7 @@
   <properties>
     <version.zkoss>6.5.0</version.zkoss>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>14</java.version>
   </properties>
 
 
@@ -151,10 +152,10 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.8.1</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>14</source>
+          <target>14</target>
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
@@ -162,7 +163,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
+        <version>3.2.0</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -177,7 +178,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.1.2</version>
+        <version>3.2.1</version>
         <executions>
           <execution>
             <phase>package</phase>

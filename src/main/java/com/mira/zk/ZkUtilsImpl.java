@@ -25,8 +25,8 @@ import static org.zkoss.zul.Messagebox.Button.*;
 public class ZkUtilsImpl implements ZkUtils {
   protected static Logger logger = Logger.getLogger(ZkUtilsImpl.class);
   protected String defaultCaption;
-  private int defaultNotificationTimeout = 10000;
-  private Notification.Position defaultNotificationPosition = Notification.Position.OVERLAP_AFTER$BOTTOM_RIGHT;
+  private int defaultNotificationTimeout = 5000;
+  private Notification.Position defaultNotificationPosition = Notification.Position.MIDDLE_CENTER;
 
   /**
    * Устанавливает заголовок для модальных окон по умолчанию

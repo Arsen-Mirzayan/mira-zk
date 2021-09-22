@@ -1,5 +1,6 @@
 package com.mira.zk;
 
+import com.mira.utils.ClassUtils;
 import com.mira.utils.StringUtils;
 import com.mira.utils.collections.CollectionUtils;
 import com.mira.zk.binding.InlineEditorBinder;
@@ -448,4 +449,17 @@ public class ZkComponents {
     popup.open(ref, position.toString());
     popup.focus();
   }
+
+  /**
+   * Создаёт компонент и инициализирует его свойства по умолчанию
+   * @param cl класс компонента
+   * @param <T> тип компонента
+   * @return созданный объект
+   */
+  public static <T extends Component> T createComponent(Class<T> cl) {
+    T result = ClassUtils.newInstance(cl);
+    result.applyProperties();
+    return result;
+  }
+
 }

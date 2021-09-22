@@ -1,23 +1,23 @@
 package com.mira.zk.components;
 
 import com.mira.utils.StringUtils;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.event.MouseEvent;
-import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zul.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Аналогичен обычному combobox, но позволяет выбирать несколько значений.
  */
 public class MultipleSelectCombo<T> extends Bandbox {
   private Listbox listbox;
-  private ObjectToStringConverter<T> converter;
+  private Function<T, String> converter;
   private boolean selectAllIfEmpty;
+  private Button selectAllButton;
+  private Button removeAllButton;
 
   private String emptyTitle;
 
@@ -43,52 +43,32 @@ public class MultipleSelectCombo<T> extends Bandbox {
    * @param source    модель с данными для выбора
    * @param converter конвертер объекта модели в строку
    */
-  public MultipleSelectCombo(List<T> source, ObjectToStringConverter<T> converter) {
+  public MultipleSelectCombo(List<T> source, Function<T, String> converter) {
     this.converter = converter;
     setReadonly(true);
     Bandpopup bandpopup = new Bandpopup();
     appendChild(bandpopup);
 
-    Hlayout hlayout = new Hlayout();
-    bandpopup.appendChild(hlayout);
-    Button button = new Button("Выбрать все");
-    hlayout.appendChild(button);
-    button.addEventListener(Events.ON_CLICK, new EventListener<MouseEvent>() {
-      @Override
-      public void onEvent(MouseEvent event) throws Exception {
-        selectAll(true);
-      }
-    });
-    button = new Button("Снять все");
-    hlayout.appendChild(button);
-    button.addEventListener(Events.ON_CLICK, new EventListener<MouseEvent>() {
-      @Override
-      public void onEvent(MouseEvent event) throws Exception {
-        selectAll(false);
-      }
-    });
+    selectAllButton = new Button("Выбрать все");
+    bandpopup.appendChild(selectAllButton);
+    selectAllButton.addEventListener(Events.ON_CLICK, event -> selectAll(true));
+
+    removeAllButton = new Button("Убрать все");
+    bandpopup.appendChild(removeAllButton);
+    removeAllButton.addEventListener(Events.ON_CLICK, event -> selectAll(false));
 
     listbox = new Listbox();
     listbox.setMultiple(true);
-    listbox.setCheckmark(true);
-    listbox.setWidth("100%");
-    listbox.setHeight("100%");
-    listbox.setItemRenderer(new ListitemRenderer<T>() {
-      @Override
-      public void render(Listitem item, T data, int index) throws Exception {
-        item.appendChild(new Listcell(MultipleSelectCombo.this.converter.toString(data)));
-        item.setValue(data);
-      }
+    listbox.setMold("paging");
+    listbox.setPageSize(10);
+    listbox.setItemRenderer((ListitemRenderer<T>) (item, data, index) -> {
+      item.appendChild(new Listcell(MultipleSelectCombo.this.converter.apply(data)));
+      item.setValue(data);
     });
     ListModelList<T> model = new ListModelList<T>(source);
     model.setMultiple(true);
     listbox.setModel(model);
-    listbox.addEventListener(Events.ON_SELECT, new EventListener<SelectEvent>() {
-      @Override
-      public void onEvent(SelectEvent event) throws Exception {
-        refreshTitle();
-      }
-    });
+    listbox.addEventListener(Events.ON_SELECT, event -> refreshTitle());
     bandpopup.appendChild(listbox);
 
     refreshTitle();
@@ -181,11 +161,56 @@ public class MultipleSelectCombo<T> extends Bandbox {
   private void refreshTitle() {
     List<String> list = new LinkedList<String>();
     for (T o : getInnerSelectedObjects()) {
-      list.add(converter.toString(o));
+      list.add(converter.apply(o));
     }
     setValue(StringUtils.join(list, ","));
     if (list.isEmpty()) {
       setValue(StringUtils.isNotEmpty(emptyTitle) ? emptyTitle : (selectAllIfEmpty ? "Все" : ""));
     }
   }
+
+  /**
+   * Устанавливает класс для кнопки выбора всех элементов
+   *
+   * @param selectAllButtonClass класс
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setSelectAllButtonClass(String selectAllButtonClass) {
+    this.selectAllButton.setSclass(selectAllButtonClass);
+    return this;
+  }
+
+  /**
+   * Устанавливает класс для кнопки снятия всех выделений
+   *
+   * @param removeAllButtonClass класс
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setRemoveAllButtonClass(String removeAllButtonClass) {
+    this.removeAllButton.setSclass(removeAllButtonClass);
+    return this;
+  }
+
+  /**
+   * Устанавливает ширину списка
+   *
+   * @param width ширина
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setInnerListboxWidth(String width) {
+    this.listbox.setWidth(width);
+    return this;
+  }
+
+  /**
+   * Устанавливает высоту списка
+   *
+   * @param height высота
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setInnerListboxHeight(String height) {
+    this.listbox.setHeight(height);
+    return this;
+  }
+
 }

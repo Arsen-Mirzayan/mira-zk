@@ -1,23 +1,25 @@
 package com.mira.zk.components;
 
 import com.mira.utils.StringUtils;
+import org.zkoss.zk.ui.annotation.ComponentAnnotation;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.*;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Аналогичен обычному combobox, но позволяет выбирать несколько значений.
  */
 public class MultipleSelectCombo<T> extends Bandbox {
-  private Listbox listbox;
+  public static final String SELECT_EVENT = Events.ON_SELECT;
+  private final Listbox listbox;
   private Function<T, String> converter;
   private boolean selectAllIfEmpty;
-  private Button selectAllButton;
-  private Button removeAllButton;
+  private final Button selectAllButton;
+  private final Button removeAllButton;
+  private Set<T> selected;
 
   private String emptyTitle;
 
@@ -32,18 +34,27 @@ public class MultipleSelectCombo<T> extends Bandbox {
    * Устанавливает текст для контрола, когда не выбрано ни одного значения
    *
    * @param emptyTitle текст для пустого контрола
+   * @return себя же последовательного вызова
    */
-  public void setEmptyTitle(String emptyTitle) {
+  public MultipleSelectCombo<T> setEmptyTitle(String emptyTitle) {
     this.emptyTitle = emptyTitle;
+     return this;
+  }
+
+  /**
+   * Создание компонента с пустой моделью и конвертором по умолчанию
+   */
+  public MultipleSelectCombo() {
+    this(Collections.emptyList(), Objects::toString);
   }
 
   /**
    * Строит компонент
    *
-   * @param source    модель с данными для выбора
-   * @param converter конвертер объекта модели в строку
+   * @param availableObjects список доступных для выбора объектов
+   * @param converter        конвертер объекта модели в строку
    */
-  public MultipleSelectCombo(List<T> source, Function<T, String> converter) {
+  public MultipleSelectCombo(List<T> availableObjects, Function<T, String> converter) {
     this.converter = converter;
     setReadonly(true);
     Bandpopup bandpopup = new Bandpopup();
@@ -65,22 +76,20 @@ public class MultipleSelectCombo<T> extends Bandbox {
       item.appendChild(new Listcell(MultipleSelectCombo.this.converter.apply(data)));
       item.setValue(data);
     });
-    ListModelList<T> model = new ListModelList<T>(source);
+    ListModelList<T> model = new ListModelList<T>(availableObjects);
     model.setMultiple(true);
     listbox.setModel(model);
-    listbox.addEventListener(Events.ON_SELECT, event -> refreshTitle());
+    listbox.addEventListener(Events.ON_SELECT, event -> onSelect());
     bandpopup.appendChild(listbox);
 
     refreshTitle();
   }
 
   /**
-   * Возвращает список доступных элементов. Список редактируемый и его изменения отражаются на компоненте.
-   *
-   * @return редактируемый список
+   * @return модель вложенного listbox
    */
-  public List<T> getSource() {
-    return (List<T>) listbox.<T>getModel();
+  private ListModelList<T> getModel() {
+    return (ListModelList<T>) listbox.<T>getModel();
   }
 
   /**
@@ -89,10 +98,17 @@ public class MultipleSelectCombo<T> extends Bandbox {
    * @param select {@code true} - выбрать все, иначе - снять
    */
   public void selectAll(boolean select) {
-    for (Object item : listbox.getItems()) {
-      ((Listitem) item).setSelected(select);
-    }
+    ListModelList<T> model = getModel();
+    model.setSelection(select ? model.getInnerList() : Collections.emptyList());
+    onSelect();
+  }
+
+  /**
+   * Обновляет заголовок и отправляет сообщение об изменении списка выбранных элементов
+   */
+  private void onSelect() {
     refreshTitle();
+    Events.postEvent(SELECT_EVENT, this, getSelectedObjects());
   }
 
   /**
@@ -117,56 +133,67 @@ public class MultipleSelectCombo<T> extends Bandbox {
     return this;
   }
 
-  @SuppressWarnings("unchecked")
-  private List<T> getInnerSelectedObjects() {
-    List<T> list = new LinkedList<T>();
-    for (Listitem item : listbox.getItems()) {
-      if (item.isSelected()) {
-        list.add(getSource().get(item.getIndex()));
-      }
-    }
-    return list;
+  /**
+   * Устанавливает список доступных для выбора объектов. При этом сбрасывается текущий выбор элементов.
+   *
+   * @param availableObjects список доступных объектов
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setAvailableObjects(List<T> availableObjects) {
+    ListModelList<T> model = new ListModelList<>(availableObjects);
+    model.setMultiple(true);
+    setSelectedObjects(selected != null ? selected : Collections.emptySet());
+    listbox.setModel(model);
+    return this;
   }
 
+
   /**
-   * Ставит галочки напротив выбранных объектов. Выбор со всех остальных объектов будет снят
+   * Ставит галочки напротив выбранных объектов. Выбор со всех остальных объектов будет снят. Если модель ещё не инициализирована,
+   * то выбор будет вызван после инициализации модели. Если модель инициализирована, то выбраны будут только те элементы, которые
+   * есть в модели.
    *
    * @param selected множество объектов, которые нужно выбрать
+   * @return себя же для последовательного вызова
    */
-  @SuppressWarnings("unchecked")
-  public void select(Collection<T> selected) {
-    List<T> model = (ListModelList) listbox.getModel();
-    List items = listbox.getItems();
-    for (int i = 0; i < items.size(); i++) {
-      ((Listitem) items.get(i)).setSelected(selected.contains(model.get(i)));
+  public MultipleSelectCombo<T> setSelectedObjects(Set<T> selected) {
+    ListModelList<T> model = getModel();
+    if (model.isEmpty()) {   //Если модель пока ещё не инициализирована, то сохраним выбор для последующей инициализации
+      this.selected = selected;
+    } else { //Иначе выберем в модели указанные элементы
+      this.selected = null;
+      model.setSelection(model.getInnerList().stream().filter(selected::contains).collect(Collectors.toSet()));
     }
     refreshTitle();
+    return this;
   }
 
   /**
    * @return возвращает список всех выбранных объектов модели
    */
-  @SuppressWarnings("unchecked")
-  public List<T> getSelectedObjects() {
-    List<T> list = getInnerSelectedObjects();
-    if (list.isEmpty() && selectAllIfEmpty) {
-      list.addAll((ListModelList) listbox.getModel());
+  @ComponentAnnotation("@ZKBIND(ACCESS=both, SAVE_EVENT=" + SELECT_EVENT + ")")
+  public Set<T> getSelectedObjects() {
+    ListModelList<T> model = getModel();
+    Set<T> selection = model.getSelection();
+    if (selection.isEmpty() && selectAllIfEmpty) {
+      selection.addAll(model.getInnerList());
     }
-    return list;
+    return selection;
   }
 
   /**
    * Обновляет заголовок
    */
   private void refreshTitle() {
-    List<String> list = new LinkedList<String>();
-    for (T o : getInnerSelectedObjects()) {
-      list.add(converter.apply(o));
+    ListModelList<T> model = getModel();
+    Set<T> selection = model.getSelection();
+    //Найдём список выбранных элементов в том порядке, в котороым они указаны в модели
+    String title = model.getInnerList().stream().filter(selection::contains).map(converter).collect(Collectors.joining(","));
+    //Если получился пустой текст, то выведем указанный текст для пустого выбора
+    if (StringUtils.isEmpty(title)) {
+      title = StringUtils.isNotEmpty(emptyTitle) ? emptyTitle : (selectAllIfEmpty ? "Все" : "");
     }
-    setValue(StringUtils.join(list, ","));
-    if (list.isEmpty()) {
-      setValue(StringUtils.isNotEmpty(emptyTitle) ? emptyTitle : (selectAllIfEmpty ? "Все" : ""));
-    }
+    setValue(title);
   }
 
   /**
@@ -213,4 +240,23 @@ public class MultipleSelectCombo<T> extends Bandbox {
     return this;
   }
 
+  /**
+   * @return функция перевода объекта в текст для пользователя
+   */
+  public Function<T, String> getConverter() {
+    return converter;
+  }
+
+  /**
+   * Устанавливает функцию перевода объекта в строке для пользователя
+   *
+   * @param converter функция
+   * @return себя же последовательного вызова
+   */
+  public MultipleSelectCombo<T> setConverter(Function<T, String> converter) {
+    this.converter = converter;
+    listbox.setModel(listbox.getModel());
+    refreshTitle();
+    return this;
+  }
 }

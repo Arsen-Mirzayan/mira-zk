@@ -309,7 +309,7 @@ public class ZkComponents {
     if (!StringUtils.isEmpty(propertyName)) {
       new InlineEditorBinder(editor, propertyName);
     }
-    editor.setHflex("1");
+    editor.setWidth("100%");
     if (parent != null) {
       parent.appendChild(editor);
     }

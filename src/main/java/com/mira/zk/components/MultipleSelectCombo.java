@@ -261,14 +261,14 @@ public class MultipleSelectCombo<T> extends Bandbox {
   }
 
   /**
-   * @return размер страницы внутреннего списка см {@link Listbox::getPageSize}
+   * @return размер страницы внутреннего списка см {@link Listbox#getPageSize}
    */
   public int getInnerListboxPageSize() {
     return listbox.getPageSize();
   }
 
   /**
-   * Устанавливает размер страницы для внутреннего списка. Смотри {@link Listbox::setPageSize}
+   * Устанавливает размер страницы для внутреннего списка. Смотри {@link Listbox#setPageSize}
    *
    * @param pageSize размер страницы
    * @return себя же для последовательного вызова

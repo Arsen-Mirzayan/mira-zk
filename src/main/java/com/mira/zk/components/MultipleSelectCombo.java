@@ -38,7 +38,7 @@ public class MultipleSelectCombo<T> extends Bandbox {
    */
   public MultipleSelectCombo<T> setEmptyTitle(String emptyTitle) {
     this.emptyTitle = emptyTitle;
-     return this;
+    return this;
   }
 
   /**
@@ -257,6 +257,24 @@ public class MultipleSelectCombo<T> extends Bandbox {
     this.converter = converter;
     listbox.setModel(listbox.getModel());
     refreshTitle();
+    return this;
+  }
+
+  /**
+   * @return размер страницы внутреннего списка см {@link Listbox::getPageSize}
+   */
+  public int getInnerListboxPageSize() {
+    return listbox.getPageSize();
+  }
+
+  /**
+   * Устанавливает размер страницы для внутреннего списка. Смотри {@link Listbox::setPageSize}
+   *
+   * @param pageSize размер страницы
+   * @return себя же для последовательного вызова
+   */
+  public MultipleSelectCombo<T> setInnerListboxPageSize(int pageSize) {
+    listbox.setPageSize(pageSize);
     return this;
   }
 }

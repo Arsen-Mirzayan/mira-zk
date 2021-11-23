@@ -142,8 +142,8 @@ public class MultipleSelectCombo<T> extends Bandbox {
   public MultipleSelectCombo<T> setAvailableObjects(List<T> availableObjects) {
     ListModelList<T> model = new ListModelList<>(availableObjects);
     model.setMultiple(true);
-    setSelectedObjects(selected != null ? selected : Collections.emptySet());
     listbox.setModel(model);
+    setSelectedObjects(selected != null ? selected : Collections.emptySet());
     return this;
   }
 

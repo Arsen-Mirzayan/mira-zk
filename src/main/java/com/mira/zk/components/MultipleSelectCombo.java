@@ -72,6 +72,7 @@ public class MultipleSelectCombo<T> extends Bandbox {
     listbox.setMultiple(true);
     listbox.setMold("paging");
     listbox.setPageSize(10);
+    listbox.setCheckmark(true);
     listbox.setItemRenderer((ListitemRenderer<T>) (item, data, index) -> {
       item.appendChild(new Listcell(MultipleSelectCombo.this.converter.apply(data)));
       item.setValue(data);

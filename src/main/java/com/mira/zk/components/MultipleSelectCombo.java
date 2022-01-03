@@ -175,7 +175,7 @@ public class MultipleSelectCombo<T> extends Bandbox {
   @ComponentAnnotation("@ZKBIND(ACCESS=both, SAVE_EVENT=" + SELECT_EVENT + ")")
   public Set<T> getSelectedObjects() {
     ListModelList<T> model = getModel();
-    Set<T> selection = model.getSelection();
+    Set<T> selection = new HashSet<>(model.getSelection());
     if (selection.isEmpty() && selectAllIfEmpty) {
       selection.addAll(model.getInnerList());
     }

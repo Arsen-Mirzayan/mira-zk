@@ -4,7 +4,8 @@ import com.mira.utils.ClassUtils;
 import com.mira.utils.StreamUtils;
 import com.mira.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.*;
 import org.zkoss.zk.ui.util.Clients;
@@ -21,9 +22,8 @@ import java.util.*;
 
 import static org.zkoss.zul.Messagebox.Button.*;
 
-
 public class ZkUtilsImpl implements ZkUtils {
-  protected static Logger logger = Logger.getLogger(ZkUtilsImpl.class);
+  private final Logger logger = LogManager.getLogger();
   protected String defaultCaption;
   private int defaultNotificationTimeout = 5000;
   private Notification.Position defaultNotificationPosition = Notification.Position.MIDDLE_CENTER;
@@ -99,8 +99,8 @@ public class ZkUtilsImpl implements ZkUtils {
   public Cookie getCookie(String name) {
     Execution execution = Executions.getCurrent();
     if (execution == null
-        || execution.getNativeRequest() == null
-        || !(execution.getNativeRequest() instanceof HttpServletRequest)) {
+      || execution.getNativeRequest() == null
+      || !(execution.getNativeRequest() instanceof HttpServletRequest)) {
       return null;
     }
     Cookie[] cookies = ((HttpServletRequest) execution.getNativeRequest()).getCookies();
@@ -127,7 +127,7 @@ public class ZkUtilsImpl implements ZkUtils {
       clearAllErrorMessages((org.zkoss.zk.ui.Component) child, excludes);
     }
     if (parent instanceof InputElement
-        && !ArrayUtils.contains(excludes, parent)) {
+      && !ArrayUtils.contains(excludes, parent)) {
       ((InputElement) parent).clearErrorMessage();
     }
   }
@@ -168,15 +168,15 @@ public class ZkUtilsImpl implements ZkUtils {
 
   @Override
   public Collection<WrongValueException> getValidationException
-      (org.zkoss.zk.ui.Component
-           parent, org.zkoss.zk.ui.Component... excludes) {
+    (org.zkoss.zk.ui.Component
+       parent, org.zkoss.zk.ui.Component... excludes) {
     Collection<WrongValueException> result = new LinkedList<WrongValueException>();
     for (Object child : parent.getChildren()) {
       result.addAll(getValidationException((org.zkoss.zk.ui.Component) child, excludes));
     }
     if (parent instanceof InputElement
-        && !ArrayUtils.contains(excludes, parent)
-        && !((InputElement) parent).isValid()) {
+      && !ArrayUtils.contains(excludes, parent)
+      && !((InputElement) parent).isValid()) {
       result.add(new WrongValueException(parent, ((InputElement) parent).getErrorMessage()));
     }
 

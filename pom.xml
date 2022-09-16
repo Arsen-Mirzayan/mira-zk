@@ -9,7 +9,7 @@
   <url>http://всеведа.рф</url>
 
   <properties>
-    <version.zkoss>6.5.0</version.zkoss>
+    <version.zkoss>9.6.0.2</version.zkoss>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>14</java.version>
   </properties>
